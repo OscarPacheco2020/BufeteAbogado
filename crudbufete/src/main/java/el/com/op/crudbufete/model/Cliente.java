@@ -12,7 +12,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     private String nombre;
 
@@ -31,11 +31,37 @@ public class Cliente {
 
     private String direccion;
 
-    public long getId() {
+    public Cliente() {
+    }
+
+    public Cliente(String nombre, String apellido, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tipoCliente = tipoCliente;
+        this.dui = dui;
+        this.nit = nit;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.direccion = direccion;
+    }
+
+    public Cliente(Integer id, String nombre, String apellido, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tipoCliente = tipoCliente;
+        this.dui = dui;
+        this.nit = nit;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.direccion = direccion;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
