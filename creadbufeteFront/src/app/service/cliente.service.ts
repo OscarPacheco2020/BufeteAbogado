@@ -20,7 +20,7 @@ export class ClienteService {
     return this.httpClient.get<Cliente>(this.clienteURL + `/${id}` );
   }
 
-  public sava(cliente: Cliente): Observable<any> {
+  public save(cliente: Cliente): Observable<any> {
     return this.httpClient.post<any>(this.clienteURL + '/', cliente);
   }
 

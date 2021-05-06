@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../models/cliente';
+import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from '../service/cliente.service';
 
 @Component({
@@ -10,11 +11,16 @@ import { ClienteService } from '../service/cliente.service';
 export class ListaClienteComponent implements OnInit {
 
   clientes: Cliente[] = [];
+
+  a: Cliente;
   
-  constructor(private clienteService: ClienteService) { }
+  constructor(
+    private clienteService: ClienteService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.cargarCliente();
+    
   }
 
   cargarCliente(): void{
@@ -26,5 +32,21 @@ export class ListaClienteComponent implements OnInit {
         console.log(err);
       }
       );
+  }
+
+  borrar(id: number) {
+    this.clienteService.delete(id).subscribe(
+      data => {
+        this.toastr.success('Cliente Eliminado', 'OK', {
+          timeOut: 3000, positionClass: 'toast-top-center'
+        });
+        this.cargarCliente();
+      },
+      err => {
+        this.toastr.error(err.error.mensaje, 'Fail', {
+          timeOut: 3000,  positionClass: 'toast-top-center',
+        });
+      }
+    );
   }
 }
