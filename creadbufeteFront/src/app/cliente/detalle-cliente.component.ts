@@ -16,6 +16,7 @@ interface Tipo {
 export class DetalleClienteComponent implements OnInit {
 
   cliente: Cliente;
+  vista: boolean;
 
   tipos: Tipo[] = [
     {value: 'NATURAL'},
@@ -34,6 +35,11 @@ export class DetalleClienteComponent implements OnInit {
     this.clienteServer.detail(id).subscribe(
       data => {
         this.cliente = data;
+        if (this.cliente.tipoCliente == 'NATURAL') {
+          this.vista = true;
+        } else {
+          this.vista = false;
+        }
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {

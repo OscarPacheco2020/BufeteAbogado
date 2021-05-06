@@ -1,61 +1,27 @@
-<div class="container" *ngIf="cliente">
-    <div class="row mt-5">
-        <div class="col-md-4 mx-auto">
-            <form  novalidate #f="ngForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre"
-                    [(ngModel)]="cliente.nombre" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="nombre">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido"
-                    [(ngModel)]="cliente.apellido" disabled>
-                </div>
+<div class="container">
+  <div class="row mt-5" *ngIf="cliente">
+    <div class="col-md-4 mx-auto">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header text-center">
+              Detalle
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Id: </b>{{cliente.id}}</li>
+              <li class="list-group-item"><b>Nombre: </b>{{cliente.nombre}}</li>
+              <li class="list-group-item" *ngIf="vista"><b>Apellido: </b>{{cliente.apellido}}</li>
+              <li class="list-group-item"><b>Tipo Cliente: </b>{{cliente.tipoCliente}}</li>
+              <li class="list-group-item" *ngIf="vista"><b>DUI: </b>{{cliente.dui}}</li>
+              <li class="list-group-item"><b>NIT: </b>{{cliente.nit}}</li>
+              <li class="list-group-item"><b>Telefono: </b>{{cliente.telefono}}</li>
+              <li class="list-group-item"><b>Celular: </b>{{cliente.celular}}</li>
+              <li class="list-group-item"><b>Direccion: </b>{{cliente.direccion}}</li>
+            </ul>
+            <div class="card-footer">
+                <button class="btn btn-outline-primary btn-block" (click)="volver()"><i class="fas fa-arrow-alt-circle-left"></i> Volver</button>
+            </div>
+          </div>
 
-                <div class="form-group">
-                    <label for="nombre">Tipo de Cliente</label>
-                    <select id="tipoCliente" class="form-select"  id="pais" [(ngModel)]="cliente.tipoCliente" name="pais" disabled>
-                        <option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.value}}</option>
-                      </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="nombre">Dui</label>
-                    <input type="text" class="form-control" id="dui" name="dui"
-                    [(ngModel)]="cliente.dui" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="nombre">Nit</label>
-                    <input type="text" class="form-control" id="nit" name="nit"
-                    [(ngModel)]="cliente.nit" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="nombre">Telefono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono"
-                    [(ngModel)]="cliente.telefono" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="nombre">Celular</label>
-                    <input type="text" class="form-control" id="celular" name="celular"
-                    [(ngModel)]="cliente.celular" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="nombre">Direccion</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion"
-                    [(ngModel)]="cliente.direccion" disabled>
-                </div>
-
-                <div class="form-group">
-                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i class="fas fa-arrow-alt-circle-left"></i> Volver</button>
-                </div>
-                
-            </form>
-        </div>
     </div>
+</div>
 </div>
 
