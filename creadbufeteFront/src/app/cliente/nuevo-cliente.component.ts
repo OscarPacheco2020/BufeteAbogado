@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 interface Tipo {
   value: string;
-  viewValue: string;
 }
 
 @Component({
@@ -33,8 +32,8 @@ export class NuevoClienteComponent implements OnInit {
   direccion: string;
 
   tipos: Tipo[] = [
-    {value: 'NATURAL', viewValue: 'Natural'},
-    {value: 'LEGAL', viewValue: 'Legal'},
+    {value: 'NATURAL'},
+    {value: 'LEGAL'},
   ];
 
   constructor(
@@ -44,6 +43,7 @@ export class NuevoClienteComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.tipoCliente = 'NATURAL';
   }
 
   onCreate(): void {

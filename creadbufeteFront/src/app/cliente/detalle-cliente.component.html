@@ -1,1 +1,61 @@
-<p>detalle-cliente works!</p>
+<div class="container" *ngIf="cliente">
+    <div class="row mt-5">
+        <div class="col-md-4 mx-auto">
+            <form  novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre"
+                    [(ngModel)]="cliente.nombre" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido"
+                    [(ngModel)]="cliente.apellido" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Tipo de Cliente</label>
+                    <select id="tipoCliente" class="form-select"  id="pais" [(ngModel)]="cliente.tipoCliente" name="pais" disabled>
+                        <option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.value}}</option>
+                      </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nombre">Dui</label>
+                    <input type="text" class="form-control" id="dui" name="dui"
+                    [(ngModel)]="cliente.dui" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Nit</label>
+                    <input type="text" class="form-control" id="nit" name="nit"
+                    [(ngModel)]="cliente.nit" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono"
+                    [(ngModel)]="cliente.telefono" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Celular</label>
+                    <input type="text" class="form-control" id="celular" name="celular"
+                    [(ngModel)]="cliente.celular" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion"
+                    [(ngModel)]="cliente.direccion" disabled>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" (click)="volver()"><i class="fas fa-arrow-alt-circle-left"></i> Volver</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
