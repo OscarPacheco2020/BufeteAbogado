@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @Transactional
@@ -15,8 +16,8 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public List<Cliente> list(){
-        return clienteRepository.findAll();
+    public Page<Cliente> list(Pageable pageable){
+        return clienteRepository.findAll(pageable);
     }
 
     public Cliente getOne(Integer id){

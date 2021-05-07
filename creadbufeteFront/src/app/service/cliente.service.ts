@@ -9,11 +9,11 @@ import { Cliente } from '../models/cliente';
 export class ClienteService {
 
   clienteURL = 'http://localhost:8080/cliente';
-  
+
   constructor(private httpClient: HttpClient) { }
 
-  public list(): Observable<Cliente[]> {
-    return this.httpClient.get<Cliente[]>(this.clienteURL + '/');
+  public list(page: number, size: number, order: string, asc: boolean): Observable<any> {
+    return this.httpClient.get<any>(this.clienteURL + '/?' +  `page=${page}&size=${size}&order=${order}&asc=${asc}`);
   }
 
   public detail(id: number): Observable<Cliente> {

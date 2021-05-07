@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("/cliente")
@@ -21,9 +22,18 @@ public class ClienteControler {
     ClienteService clienteService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Cliente>> list(){
-        List <Cliente> list = clienteService.list();
-        return new ResponseEntity(list, HttpStatus.OK);
+    public ResponseEntity<Page<Cliente>> paginas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "nombre") String order,
+            @RequestParam(defaultValue = "true") boolean asc
+    ){
+        Page<Cliente> clientes = clienteService.list(
+                PageRequest.of(page, size, Sort.by(order)));
+        if(!asc)
+            clientes = clienteService.list(
+                    PageRequest.of(page, size, Sort.by(order).descending()));
+        return new ResponseEntity<Page<Cliente>>(clientes, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
