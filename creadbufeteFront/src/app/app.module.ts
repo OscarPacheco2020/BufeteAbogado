@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 // extartna 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FiltroClientePipe } from './pipes/filtro-cliente.pipe';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ToastrModule } from 'ngx-toastr';
     ListaClienteComponent,
     DetalleClienteComponent,
     NuevoClienteComponent,
-    EditarClienteComponent
+    EditarClienteComponent,
+    FiltroClientePipe
   ],
   imports: [
     BrowserModule,

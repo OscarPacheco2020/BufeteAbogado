@@ -14,6 +14,8 @@ export class ListaClienteComponent implements OnInit {
 
   totalPages: Array<number>;
 
+  filtroClienteV: '';
+
   page = 0;
   size = 10;
   order = 'id';
@@ -28,7 +30,6 @@ export class ListaClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarCliente();
-
   }
 
   cargarCliente(): void {
