@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../models/cliente';
 import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from '../service/cliente.service';
 
