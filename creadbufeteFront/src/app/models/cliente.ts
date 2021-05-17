@@ -25,4 +25,5 @@ export class Cliente {
             this.celular = celular;
             this.direccion = direccion;
         }
+
 }
