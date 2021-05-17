@@ -8,8 +8,6 @@ public class ClienteDto {
     @NotBlank
     private String nombre;
 
-    private String apellido;
-
     private TipoCliente tipoCliente;
 
     private String dui;
@@ -25,9 +23,8 @@ public class ClienteDto {
     public ClienteDto() {
     }
 
-    public ClienteDto(String nombre, String apellido, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
+    public ClienteDto(String nombre, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
         this.nombre = nombre;
-        this.apellido = apellido;
         this.tipoCliente = tipoCliente;
         this.dui = dui;
         this.nit = nit;
@@ -42,14 +39,6 @@ public class ClienteDto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public TipoCliente getTipoCliente() {

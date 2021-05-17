@@ -49,7 +49,7 @@ public class ClienteControler {
         if(StringUtils.isBlank(clienteDto.getNombre()))
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 
-        Cliente cliente = new Cliente(clienteDto.getNombre(), clienteDto.getApellido(),
+        Cliente cliente = new Cliente(clienteDto.getNombre(),
                 clienteDto.getTipoCliente(), clienteDto.getDui(), clienteDto.getNit(),
                 clienteDto.getTelefono(), clienteDto.getCelular(), clienteDto.getDireccion());
         clienteService.save(cliente);
@@ -64,7 +64,6 @@ public class ClienteControler {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         Cliente cliente = clienteService.getOne(id);
         cliente.setNombre(clienteDto.getNombre());
-        cliente.setApellido(clienteDto.getApellido());
         cliente.setTipoCliente(clienteDto.getTipoCliente());
         cliente.setDui(clienteDto.getDui());
         cliente.setNit(clienteDto.getNit());

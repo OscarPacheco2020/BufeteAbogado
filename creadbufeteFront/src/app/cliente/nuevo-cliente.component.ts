@@ -17,8 +17,6 @@ export class NuevoClienteComponent implements OnInit {
 
   nombre: string;
 
-  apellido: string;
-
   tipoCliente: string;
 
   dui: string = '';
@@ -49,7 +47,7 @@ export class NuevoClienteComponent implements OnInit {
 
   onCreate(): void {
 
-    const cliente = new Cliente(this.nombre , this.apellido, this.tipoCliente,
+    const cliente = new Cliente(this.nombre , this.tipoCliente,
       this.dui, this.nit , this.telefono , this.celular , this.direccion);
 
       var validarParaSalvar = true;

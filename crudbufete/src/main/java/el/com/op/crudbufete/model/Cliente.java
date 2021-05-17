@@ -16,8 +16,6 @@ public class Cliente {
 
     private String nombre;
 
-    private String apellido;
-
     @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;
 
@@ -34,9 +32,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellido, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
+    public Cliente(String nombre, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
         this.nombre = nombre;
-        this.apellido = apellido;
         this.tipoCliente = tipoCliente;
         this.dui = dui;
         this.nit = nit;
@@ -45,10 +42,9 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public Cliente(Integer id, String nombre, String apellido, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
+    public Cliente(Integer id, String nombre, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
         this.id = id;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.tipoCliente = tipoCliente;
         this.dui = dui;
         this.nit = nit;
@@ -71,14 +67,6 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public TipoCliente getTipoCliente() {

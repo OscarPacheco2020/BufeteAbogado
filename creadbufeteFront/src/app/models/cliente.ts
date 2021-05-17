@@ -3,8 +3,6 @@ export class Cliente {
 
     nombre: string;
 
-    apellido: string;
-
     tipoCliente: string;
 
     dui: string;
@@ -17,10 +15,9 @@ export class Cliente {
 
     direccion: string;
 
-    constructor(nombre: string, apellido: string, tipoCliente: string, dui: string, 
+    constructor(nombre: string, tipoCliente: string, dui: string,
         nit: string, telefono: string, celular: string, direccion: string){
             this.nombre = nombre;
-            this.apellido = apellido;
             this.tipoCliente = tipoCliente;
             this.dui = dui;
             this.nit = nit;
