@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Cliente {
@@ -28,6 +29,9 @@ public class Cliente {
     private String celular;
 
     private String direccion;
+
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    private Set<Caso> casos;
 
     public Cliente() {
     }
@@ -55,10 +59,6 @@ public class Cliente {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getNombre() {

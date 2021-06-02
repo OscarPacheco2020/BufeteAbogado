@@ -16,6 +16,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FiltroClientePipe } from './pipes/filtro-cliente.pipe';
+import { ListaCasoComponent } from './coso/lista-caso.component';
+import { NuevoCasoComponent } from './coso/nuevo-caso.component';
+import { EditarCasoComponent } from './coso/editar-caso.component';
+import { DetalleCasoComponent } from './coso/detalle-caso.component';
+import { ListaCasoClienteComponent } from './coso/lista-caso-cliente.component';
 
 
 @NgModule({
@@ -25,7 +30,12 @@ import { FiltroClientePipe } from './pipes/filtro-cliente.pipe';
     DetalleClienteComponent,
     NuevoClienteComponent,
     EditarClienteComponent,
-    FiltroClientePipe
+    FiltroClientePipe,
+    ListaCasoComponent,
+    NuevoCasoComponent,
+    EditarCasoComponent,
+    DetalleCasoComponent,
+    ListaCasoClienteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,13 @@
 <div class="container">
   <h2 class="text-center">Clientes</h2>
 
+
   <form>
     <div class="form-group">
       <div class="input-group">
+        <button type="button" class="btn btn-primary" routerLink="/nuevo">
+          <i class="fas fa-plus-circle"></i>
+          Nuevo Cliente</button>
         <div class="input-group-text bg-white">
           <i class="fa fa-search"></i>
         </div>
@@ -24,6 +28,8 @@
         <th scope="col">Ver</th>
         <th scope="col">Editar</th>
         <th scope="col">Borrar</th>
+        <th scope="col">Caso Nuevo</th>
+        <th scope="col">Lista Casos</th>
         <th scope="col"><i class="fas fa-sort" (click)="sort()"></i></th>
       </tr>
     </thead>
@@ -37,6 +43,8 @@
         <td><button class="btn btn-outline-primary" routerLink="/detalle/{{cliente.id}}"><i class="far fa-eye"></i> Ver</button></td>
         <td><button class="btn btn-outline-warning" routerLink="/editar/{{cliente.id}}"><i class="far fa-edit"></i> Editar</button></td>
         <td><button class="btn btn-outline-danger" (click)="borrar(cliente.id)"><i class="far fa-trash-alt"></i> Eliminar</button></td>
+        <td><button class="btn btn-outline-primary" routerLink="/nuevoCaso/{{cliente.id}}"><i class="fas fa-plus-circle"></i> Nuevo Caso</button></td>
+        <td><button class="btn btn-outline-primary" routerLink="/listaCasocliente/{{cliente.id}}"><i class="fas fa-list-ol"></i> Lista Casos</button></td>
         <td></td>
       </tr>
       <tr>

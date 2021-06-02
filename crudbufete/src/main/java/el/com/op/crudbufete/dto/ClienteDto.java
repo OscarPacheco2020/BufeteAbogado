@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 
 public class ClienteDto {
 
+    private Integer id;
+
     @NotBlank
     private String nombre;
 
@@ -87,5 +89,13 @@ public class ClienteDto {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
