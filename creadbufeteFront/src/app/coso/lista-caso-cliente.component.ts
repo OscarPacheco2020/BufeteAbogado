@@ -11,7 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListaCasoClienteComponent implements OnInit {
 
-  casos: Caso[];
+  casos: Array<any>;
+
+  totalPages: Array<number>;
+
+  page = 0;
+  size = 10;
+  order = 'id';
+  asc = true;
+
+  isFirst = false;
+  isLast = false;
 
   constructor(
     private casoService: CasoService,
@@ -26,9 +36,12 @@ export class ListaCasoClienteComponent implements OnInit {
   cargarCasos(): void {
     const id = this.activatedRouter.snapshot.params.id;
 
-    this.casoService.listaForCliente(id).subscribe(
+    this.casoService.listaForCliente(this.page, this.size, this.order, this.asc, id).subscribe(
       data => {
-        this.casos = data;
+        this.casos = data.content;
+        this.isFirst = data.first;
+        this.isLast = data.last;
+        this.totalPages = new Array(data['totalPages']);
       },
       err => {
         console.log(err);
@@ -39,7 +52,7 @@ export class ListaCasoClienteComponent implements OnInit {
   borrar(id: number){
     this.casoService.delete(id).subscribe(
       data => {
-        this.toastr.success('Cliente Eliminado', 'OK', {
+        this.toastr.success('Caso Eliminado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
         this.cargarCasos();
@@ -51,5 +64,35 @@ export class ListaCasoClienteComponent implements OnInit {
       }
     );
   }
+
+  sort(): void {
+    this.asc = !this.asc;
+    this.cargarCasos();
+  }
+
+  rewind(): void {
+    if (!this.isFirst) {
+      this.page--;
+      this.cargarCasos();
+    }
+  }
+
+  forward(): void {
+    if (!this.isLast) {
+      this.page++;
+      this.cargarCasos();
+    }
+  }
+
+  setPage(page: number): void {
+    this.page = page;
+    this.cargarCasos();
+  }
+
+  setOrder(order: string): void {
+    this.order = order;
+    this.cargarCasos();
+  }
+
 
 }

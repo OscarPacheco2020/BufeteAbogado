@@ -11,8 +11,8 @@ export class CasoService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public lista(): Observable<Caso[]> {
-    return this.httpClient.get<Caso[]>(this.casoUrl + '/');
+  public lista(page: number, size: number, order: string, asc: boolean): Observable<any> {
+    return this.httpClient.get<any>(this.casoUrl + '/?' +  `page=${page}&size=${size}&order=${order}&asc=${asc}`);
   }
 
   public detail(id: number): Observable<Caso> {
@@ -31,8 +31,8 @@ export class CasoService {
     return this.httpClient.delete<any>(this.casoUrl + `/${id}`);
   }
 
-  public listaForCliente(id: number): Observable<Caso[]> {
-    return this.httpClient.get<Caso[]>(this.casoUrl + '/cliente' + `/${id}`);
+  public listaForCliente(page: number, size: number, order: string, asc: boolean, id: number): Observable<any> {
+    return this.httpClient.get<any>(this.casoUrl + '/cliente' + `/${id}` + '?' +  `page=${page}&size=${size}&order=${order}&asc=${asc}`);
   }
 
 }
