@@ -14,6 +14,8 @@ export class ListaCasoComponent implements OnInit {
 
   totalPages: Array<number>;
 
+  filtroCaso: '';
+
   page = 0;
   size = 10;
   order = 'id';

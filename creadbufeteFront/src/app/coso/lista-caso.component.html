@@ -2,6 +2,18 @@
   <h2 class="text-center">Casos</h2>
 
 
+  <form>
+    <div class="form-group">
+      <div class="input-group">
+
+        <div class="input-group-text bg-white">
+          <i class="fa fa-search"></i>
+        </div>
+      <input type="text" name="filtroCaso" class="form-control" placeholder="Buscar en pagina ..."
+      [(ngModel)]="filtroCaso">
+      </div>
+    </div>
+  </form>
 
   <table class="table table-dark text-center">
     <thead>
@@ -17,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let caso of casos">
+      <tr *ngFor="let caso of casos |filtroCliente:'codigo':filtroCaso">
         <td>{{caso.id}}</td>
         <td>{{caso.codigo}}</td>
         <td>{{caso.creacion | date:"dd-MM-yyyy" }}</td>
