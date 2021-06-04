@@ -33,6 +33,7 @@ public class ClienteControler {
         if(!asc)
             clientes = clienteService.list(
                     PageRequest.of(page, size, Sort.by(order).descending()));
+
         return new ResponseEntity<Page<Cliente>>(clientes, HttpStatus.OK);
     }
 

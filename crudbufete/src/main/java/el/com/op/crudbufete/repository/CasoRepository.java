@@ -5,6 +5,9 @@ import el.com.op.crudbufete.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 @Repository
@@ -12,5 +15,5 @@ public interface CasoRepository extends JpaRepository<Caso, Integer> {
 
     boolean existsByCodigo(String  codigo);
 
-    List<Caso> findByCliente(Cliente cliente);
+    Page<Caso> findByCliente(Pageable pageable, Cliente cliente);
 }

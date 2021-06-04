@@ -19,8 +19,8 @@ public class CasoService {
     @Autowired
     CasoRepository casoRepository;
 
-    public List<Caso> list(){
-        return casoRepository.findAll();
+    public Page<Caso> list(Pageable pageable){
+        return casoRepository.findAll(pageable);
     }
 
     public Caso getOne(Integer id){
@@ -39,8 +39,8 @@ public class CasoService {
         return casoRepository.existsById(id);
     }
 
-    public List<Caso> listByCliente(Cliente cliente){
-        return casoRepository.findByCliente(cliente);
+    public Page<Caso> listByCliente(Pageable pageable, Cliente cliente){
+        return casoRepository.findByCliente(pageable, cliente);
     }
 
     public boolean existeByCodigo(String codigo){

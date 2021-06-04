@@ -1,7 +1,6 @@
 package el.com.op.crudbufete.controller;
 
 import el.com.op.crudbufete.dto.CasoDto;
-import el.com.op.crudbufete.dto.ClienteDto;
 import el.com.op.crudbufete.dto.Mensaje;
 import el.com.op.crudbufete.model.Caso;
 import el.com.op.crudbufete.model.Cliente;
@@ -30,9 +29,19 @@ public class CasoControler {
     CasoService casoService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Caso>> paginas(){
-        List<Caso> casos = casoService.list();
-        return new ResponseEntity<List<Caso>>(casos, HttpStatus.OK);
+    public ResponseEntity<Page<Caso>> paginas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "nombre") String order,
+            @RequestParam(defaultValue = "true") boolean asc
+    ){
+        Page<Caso> casos = casoService.list(
+                PageRequest.of(page, size, Sort.by(order)));
+        if(!asc)
+            casos = casoService.list(
+                    PageRequest.of(page, size, Sort.by(order).descending()));
+
+        return new ResponseEntity<Page<Caso>>(casos, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -99,15 +108,26 @@ public class CasoControler {
     }
 
     @GetMapping("/cliente/{id}")
-    public ResponseEntity<List<Caso>> listaByCliente(@PathVariable("id") Integer id){
+    public ResponseEntity<Page<Caso>> listaByCliente(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "nombre") String order,
+            @RequestParam(defaultValue = "true") boolean asc,
+            @PathVariable("id") Integer id){
 
         if(!clienteService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe Cliente"), HttpStatus.NOT_FOUND);
 
         Cliente cliente = clienteService.getOne(id);
 
-        List<Caso> casos = casoService.listByCliente(cliente);
-        return new ResponseEntity<List<Caso>>(casos, HttpStatus.OK);
+        Page<Caso> casos = casoService.listByCliente(
+                PageRequest.of(page, size, Sort.by(order)), cliente);
+        if(!asc)
+            casos = casoService.listByCliente(
+                    PageRequest.of(page, size, Sort.by(order).descending()), cliente);
+
+        return new ResponseEntity<Page<Caso>>(casos, HttpStatus.OK);
+
     }
 
 }
