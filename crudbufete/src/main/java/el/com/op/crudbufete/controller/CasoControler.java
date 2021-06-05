@@ -4,8 +4,10 @@ import el.com.op.crudbufete.dto.CasoDto;
 import el.com.op.crudbufete.dto.Mensaje;
 import el.com.op.crudbufete.model.Caso;
 import el.com.op.crudbufete.model.Cliente;
+import el.com.op.crudbufete.model.TipoCaso;
 import el.com.op.crudbufete.service.CasoService;
 import el.com.op.crudbufete.service.ClienteService;
+import el.com.op.crudbufete.service.TipoCasoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,7 @@ import org.springframework.data.domain.Sort;
 import java.util.List;
 
 @RestController
-@RequestMapping("/caso")
+@RequestMapping("/api/v1.0/caso")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CasoControler {
 
@@ -27,6 +29,9 @@ public class CasoControler {
 
     @Autowired
     CasoService casoService;
+
+    @Autowired
+    TipoCasoService tipoCasoService;
 
     @GetMapping("/")
     public ResponseEntity<Page<Caso>> paginas(
@@ -58,8 +63,17 @@ public class CasoControler {
         if(!clienteService.existsById(casoDto.getCliente().getId()))
             return new ResponseEntity(new Mensaje("No existe Cliente"), HttpStatus.NOT_FOUND);
 
+        if(!tipoCasoService.existsById(casoDto.getTipoCaso().getId()))
+            return new ResponseEntity(new Mensaje("El tipo de caso no existe"), HttpStatus.NOT_FOUND);
+
         if(casoService.existeByCodigo(casoDto.getCodigo()))
             return new ResponseEntity(new Mensaje("El Codigo ya existe"), HttpStatus.NOT_FOUND);
+
+        System.out.println("-------------------------------------------------------------------");
+
+        System.out.println("id : " + casoDto.getTipoCaso().getId());
+        System.out.println("nombre : " + casoDto.getTipoCaso().getNombre());
+        System.out.println("-------------------------------------------------------------------");
 
         Caso caso = new Caso();
         caso.setCodigo(casoDto.getCodigo());
@@ -69,6 +83,10 @@ public class CasoControler {
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
         caso.setCliente(cliente);
 
+        TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
+
+        caso.setTipoCaso(tipoCaso);
+
         casoService.save(caso);
         return new ResponseEntity(new Mensaje("Caso creado"), HttpStatus.OK);
     }
@@ -76,7 +94,10 @@ public class CasoControler {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id")Integer id, @RequestBody CasoDto casoDto){
         if(!casoService.existsById(id))
-            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new Mensaje("No existe caso"), HttpStatus.NOT_FOUND);
+
+        if(!tipoCasoService.existsById(casoDto.getTipoCaso().getId()))
+            return new ResponseEntity(new Mensaje("El tipo de caso no existe"), HttpStatus.NOT_FOUND);
 
         Caso casoOld = casoService.getOne(id);
 
@@ -88,10 +109,12 @@ public class CasoControler {
 
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
 
+        TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
         Caso caso = casoService.getOne(id);
         caso.setCodigo(casoDto.getCodigo());
         caso.setRecomendado(casoDto.getRecomendado());
         caso.setCreacion(casoDto.getCreacion());
+        caso.setTipoCaso(tipoCaso);
         caso.setCliente(cliente);
 
         casoService.save(caso);

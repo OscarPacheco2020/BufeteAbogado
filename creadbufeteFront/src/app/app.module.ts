@@ -21,6 +21,10 @@ import { NuevoCasoComponent } from './coso/nuevo-caso.component';
 import { EditarCasoComponent } from './coso/editar-caso.component';
 import { DetalleCasoComponent } from './coso/detalle-caso.component';
 import { ListaCasoClienteComponent } from './coso/lista-caso-cliente.component';
+import { ListaTipoCasoComponent } from './tipoCaso/lista-tipo-caso.component';
+import { DetalleTipoCasoComponent } from './tipoCaso/detalle-tipo-caso.component';
+import { EditarTipoCasoComponent } from './tipoCaso/editar-tipo-caso.component';
+import { NuevoTipoCasoComponent } from './tipoCaso/nuevo-tipo-caso.component';
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { ListaCasoClienteComponent } from './coso/lista-caso-cliente.component';
     NuevoCasoComponent,
     EditarCasoComponent,
     DetalleCasoComponent,
-    ListaCasoClienteComponent
+    ListaCasoClienteComponent,
+    ListaTipoCasoComponent,
+    DetalleTipoCasoComponent,
+    EditarTipoCasoComponent,
+    NuevoTipoCasoComponent
   ],
   imports: [
     BrowserModule,

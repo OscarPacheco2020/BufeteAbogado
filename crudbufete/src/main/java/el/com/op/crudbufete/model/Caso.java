@@ -22,6 +22,10 @@ public class Caso {
     @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idTipoCaso", nullable = false)
+    private TipoCaso tipoCaso;
+
     public Caso() {
     }
 
@@ -29,19 +33,21 @@ public class Caso {
         this.id = id;
     }
 
-    public Caso(String codigo, Calendar creacion, String recomendado, Cliente cliente) {
+    public Caso(String codigo, Calendar creacion, String recomendado, Cliente cliente, TipoCaso tipoCaso) {
         this.codigo = codigo;
         this.creacion = creacion;
         this.recomendado = recomendado;
         this.cliente = cliente;
+        this.tipoCaso = tipoCaso;
     }
 
-    public Caso(Integer id, String codigo, Calendar creacion, String recomendado, Cliente cliente) {
+    public Caso(Integer id, String codigo, Calendar creacion, String recomendado, Cliente cliente, TipoCaso tipoCaso) {
         this.id = id;
         this.codigo = codigo;
         this.creacion = creacion;
         this.recomendado = recomendado;
         this.cliente = cliente;
+        this.tipoCaso = tipoCaso;
     }
 
     public Integer getId() {
@@ -78,5 +84,13 @@ public class Caso {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public TipoCaso getTipoCaso() {
+        return tipoCaso;
+    }
+
+    public void setTipoCaso(TipoCaso tipoCaso) {
+        this.tipoCaso = tipoCaso;
     }
 }

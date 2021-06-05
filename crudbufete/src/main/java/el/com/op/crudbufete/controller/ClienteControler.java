@@ -14,7 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/api/v1.0/cliente")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClienteControler {
 

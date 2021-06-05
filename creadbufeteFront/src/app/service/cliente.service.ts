@@ -8,7 +8,7 @@ import { Cliente } from '../models/cliente';
 })
 export class ClienteService {
 
-  clienteURL = 'http://localhost:8080/cliente';
+  clienteURL = 'http://localhost:8080/api/v1.0/cliente';
 
   constructor(private httpClient: HttpClient) { }
 

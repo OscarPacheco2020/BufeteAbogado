@@ -7,7 +7,7 @@ import { Caso } from '../models/caso';
   providedIn: 'root',
 })
 export class CasoService {
-  casoUrl = 'http://localhost:8080/caso';
+  casoUrl = 'http://localhost:8080/api/v1.0/caso';
 
   constructor(private httpClient: HttpClient) {}
 

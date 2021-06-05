@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Caso } from '../models/caso';
+import { TipoCaso } from '../models/tipo-caso';
 import { CasoService } from '../service/caso.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class EditarCasoComponent implements OnInit {
   nombreCliente: string;
   recomendado: string;
   actualizarFecha: boolean;
+  tipoCaso: TipoCaso;
 
   constructor(
     private casoServer: CasoService,
@@ -57,9 +59,8 @@ export class EditarCasoComponent implements OnInit {
       this.creacion = new Date(this.creacionActual.toString());
     }
 
-
-    console.log('creacion ' + this.creacion);
-    const casoNuevo = new Caso(this.codigo, this.creacion, this.recomendado, this.caso.cliente);
+    const casoNuevo = new Caso(this.codigo, this.creacion, this.recomendado,
+      this.caso.cliente, this.caso.tipoCaso);
 
     this.casoServer.update(id, casoNuevo).subscribe(
       data => {
