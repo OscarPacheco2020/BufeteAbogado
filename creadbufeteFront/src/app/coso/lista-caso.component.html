@@ -22,6 +22,7 @@
         <th scope="col">Código:</th>
         <th scope="col">Creado:</th>
         <th scope="col">Cliente:</th>
+        <th scope="col">Tipo de Caso:</th>
         <th scope="col">Ver</th>
         <th scope="col">Editar</th>
         <th scope="col">Borrar</th>
@@ -34,6 +35,7 @@
         <td>{{caso.codigo}}</td>
         <td>{{caso.creacion | date:"dd-MM-yyyy" }}</td>
         <td>{{caso.cliente.nombre}}</td>
+        <td>{{caso.tipoCaso.nombre}}</td>
         <td><button class="btn btn-outline-primary" routerLink="/detalleCaso/{{caso.id}}"><i class="far fa-eye"></i> Ver</button></td>
         <td><button class="btn btn-outline-warning" routerLink="/editarCaso/{{caso.id}}"><i class="far fa-edit"></i> Editar</button></td>
         <td><button class="btn btn-outline-danger" (click)="borrar(caso.id)" ><i class="far fa-trash-alt"></i> Eliminar</button></td>

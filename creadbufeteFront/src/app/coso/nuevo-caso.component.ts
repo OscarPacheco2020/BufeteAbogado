@@ -48,6 +48,10 @@ export class NuevoCasoComponent implements OnInit {
       }
     );
 
+   this.cargaTipoCasos();
+  }
+
+  cargaTipoCasos(): void{
     this.tipoCasoService.lista().subscribe(
       (data) => {
         this.tipoCasos = data;

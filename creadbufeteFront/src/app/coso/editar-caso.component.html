@@ -8,6 +8,16 @@
         </div>
 
         <div class="form-group">
+          <label for="nombre">Tipo de Caso:</label>
+          <select class="form-select" aria-label="Default select example" name="tipoCaso"
+          id="tipoCaso" [(ngModel)]="IdtipoCaso" required >
+
+            <option *ngFor="let valorTipoC of tipoCasos" [value]="valorTipoC.id" >{{valorTipoC.nombre}}</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
           <label for="nombre">Codigo:</label>
           <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="codigo" placeholder="codigo" required>
         </div>

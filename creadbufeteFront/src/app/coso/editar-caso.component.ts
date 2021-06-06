@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Caso } from '../models/caso';
 import { TipoCaso } from '../models/tipo-caso';
 import { CasoService } from '../service/caso.service';
+import { TipoCasoService } from '../service/tipo-caso.service';
 
 @Component({
   selector: 'app-editar-caso',
@@ -21,12 +22,15 @@ export class EditarCasoComponent implements OnInit {
   recomendado: string;
   actualizarFecha: boolean;
   tipoCaso: TipoCaso;
+  tipoCasos: TipoCaso[] = [];
+  IdtipoCaso: number;
 
   constructor(
     private casoServer: CasoService,
     private activatedRouter: ActivatedRoute,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private tipoCasoService: TipoCasoService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +43,10 @@ export class EditarCasoComponent implements OnInit {
         this.recomendado = this.caso.recomendado;
         this.codigo = this.caso.codigo;
         this.actualizarFecha = false;
+        this.tipoCaso = this.caso.tipoCaso;
+        this.cargarTipoCaso();
+        this.IdtipoCaso = this.caso.tipoCaso.id;
+
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {
@@ -47,8 +55,23 @@ export class EditarCasoComponent implements OnInit {
         this.router.navigate(['/listaCaso']);
       }
     );
+
   }
 
+  cargarTipoCaso(): void{
+    this.tipoCasoService.lista().subscribe(
+      (data) => {
+        this.tipoCasos = data;
+      },
+      (err) => {
+        this.toastr.error(err.error.mensaje, 'Fail', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center',
+        });
+        this.router.navigate(['/listaCaso']);
+      }
+    );
+  }
   onUpdate(): void {
     const id = this.activatedRouter.snapshot.params.id;
 
@@ -59,8 +82,16 @@ export class EditarCasoComponent implements OnInit {
       this.creacion = new Date(this.creacionActual.toString());
     }
 
+    for (let caso of this.tipoCasos) {
+      if (caso.id == this.IdtipoCaso) {
+        this.tipoCaso = caso;
+      }
+    }
+
+    console.log(this.tipoCaso.id);
+
     const casoNuevo = new Caso(this.codigo, this.creacion, this.recomendado,
-      this.caso.cliente, this.caso.tipoCaso);
+      this.caso.cliente, this.tipoCaso);
 
     this.casoServer.update(id, casoNuevo).subscribe(
       data => {

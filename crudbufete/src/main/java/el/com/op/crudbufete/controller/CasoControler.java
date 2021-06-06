@@ -68,13 +68,6 @@ public class CasoControler {
 
         if(casoService.existeByCodigo(casoDto.getCodigo()))
             return new ResponseEntity(new Mensaje("El Codigo ya existe"), HttpStatus.NOT_FOUND);
-
-        System.out.println("-------------------------------------------------------------------");
-
-        System.out.println("id : " + casoDto.getTipoCaso().getId());
-        System.out.println("nombre : " + casoDto.getTipoCaso().getNombre());
-        System.out.println("-------------------------------------------------------------------");
-
         Caso caso = new Caso();
         caso.setCodigo(casoDto.getCodigo());
         caso.setRecomendado(casoDto.getRecomendado());
@@ -110,6 +103,7 @@ public class CasoControler {
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
 
         TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
+        
         Caso caso = casoService.getOne(id);
         caso.setCodigo(casoDto.getCodigo());
         caso.setRecomendado(casoDto.getRecomendado());
