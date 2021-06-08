@@ -40,6 +40,8 @@ public class CasoControler {
             @RequestParam(defaultValue = "nombre") String order,
             @RequestParam(defaultValue = "true") boolean asc
     ){
+
+
         Page<Caso> casos = casoService.list(
                 PageRequest.of(page, size, Sort.by(order)));
         if(!asc)
@@ -48,6 +50,7 @@ public class CasoControler {
 
         return new ResponseEntity<Page<Caso>>(casos, HttpStatus.OK);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Caso> getById(@PathVariable("id") Integer id){
@@ -63,9 +66,6 @@ public class CasoControler {
         if(!clienteService.existsById(casoDto.getCliente().getId()))
             return new ResponseEntity(new Mensaje("No existe Cliente"), HttpStatus.NOT_FOUND);
 
-        if(!tipoCasoService.existsById(casoDto.getTipoCaso().getId()))
-            return new ResponseEntity(new Mensaje("El tipo de caso no existe"), HttpStatus.NOT_FOUND);
-
         if(casoService.existeByCodigo(casoDto.getCodigo()))
             return new ResponseEntity(new Mensaje("El Codigo ya existe"), HttpStatus.NOT_FOUND);
         Caso caso = new Caso();
@@ -76,9 +76,16 @@ public class CasoControler {
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
         caso.setCliente(cliente);
 
-        TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
+        if(casoDto.getTipoCaso().getId() != null){
+            if(!tipoCasoService.existsById(casoDto.getTipoCaso().getId()))
+                return new ResponseEntity(new Mensaje("El tipo de caso no existe"), HttpStatus.NOT_FOUND);
 
-        caso.setTipoCaso(tipoCaso);
+            TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
+            caso.setTipoCaso(tipoCaso);
+        }else{
+            TipoCaso tipoCaso = tipoCasoService.save(new TipoCaso(casoDto.getTipoCaso().getNombre()));
+            caso.setTipoCaso(tipoCaso);
+        }
 
         casoService.save(caso);
         return new ResponseEntity(new Mensaje("Caso creado"), HttpStatus.OK);
@@ -103,7 +110,7 @@ public class CasoControler {
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
 
         TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
-        
+
         Caso caso = casoService.getOne(id);
         caso.setCodigo(casoDto.getCodigo());
         caso.setRecomendado(casoDto.getRecomendado());
