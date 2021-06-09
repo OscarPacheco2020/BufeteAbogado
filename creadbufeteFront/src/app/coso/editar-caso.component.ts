@@ -24,6 +24,8 @@ export class EditarCasoComponent implements OnInit {
   tipoCaso: TipoCaso;
   tipoCasos: TipoCaso[] = [];
   IdtipoCaso: number;
+  nuevoTipoCaso: boolean;
+  nombreTipoCaso: string;
 
   constructor(
     private casoServer: CasoService,
@@ -35,6 +37,7 @@ export class EditarCasoComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRouter.snapshot.params.id;
+    this.nuevoTipoCaso = false;
     this.casoServer.detail(id).subscribe(
       data => {
         this.caso = data;
@@ -82,13 +85,16 @@ export class EditarCasoComponent implements OnInit {
       this.creacion = new Date(this.creacionActual.toString());
     }
 
-    for (let caso of this.tipoCasos) {
-      if (caso.id == this.IdtipoCaso) {
-        this.tipoCaso = caso;
+
+    if(this.nuevoTipoCaso){
+      this.tipoCaso =  new TipoCaso(this.nombreTipoCaso);
+    }else{
+      for (let caso of this.tipoCasos) {
+        if (caso.id == this.IdtipoCaso) {
+          this.tipoCaso = caso;
+        }
       }
     }
-
-    console.log(this.tipoCaso.id);
 
     const casoNuevo = new Caso(this.codigo, this.creacion, this.recomendado,
       this.caso.cliente, this.tipoCaso);
@@ -104,7 +110,7 @@ export class EditarCasoComponent implements OnInit {
         this.toastr.error(err.error.mensaje, 'Fail', {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
-        this.router.navigate(['/listaCaso']);
+        //this.router.navigate(['/listaCaso']);
       }
     );
   }

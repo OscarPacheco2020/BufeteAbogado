@@ -83,6 +83,9 @@ public class CasoControler {
             TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
             caso.setTipoCaso(tipoCaso);
         }else{
+            if(tipoCasoService.existsByNombre(casoDto.getTipoCaso().getNombre()))
+                 return new ResponseEntity(new Mensaje("El nombre de Tipo de caso existe"), HttpStatus.NOT_FOUND);
+
             TipoCaso tipoCaso = tipoCasoService.save(new TipoCaso(casoDto.getTipoCaso().getNombre()));
             caso.setTipoCaso(tipoCaso);
         }
@@ -96,12 +99,9 @@ public class CasoControler {
         if(!casoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe caso"), HttpStatus.NOT_FOUND);
 
-        if(!tipoCasoService.existsById(casoDto.getTipoCaso().getId()))
-            return new ResponseEntity(new Mensaje("El tipo de caso no existe"), HttpStatus.NOT_FOUND);
+        Caso caso = casoService.getOne(id);
 
-        Caso casoOld = casoService.getOne(id);
-
-        if(!casoOld.getCodigo().equals(casoDto.getCodigo())){
+        if(!caso.getCodigo().equals(casoDto.getCodigo())){
             if(casoService.existeByCodigo(casoDto.getCodigo()))
                 return new ResponseEntity(new Mensaje("El Codigo ya existe"), HttpStatus.NOT_FOUND);
         }
@@ -109,13 +109,23 @@ public class CasoControler {
 
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
 
-        TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
+        if(casoDto.getTipoCaso().getId() != null){
+            if(!tipoCasoService.existsById(casoDto.getTipoCaso().getId()))
+                return new ResponseEntity(new Mensaje("El tipo de caso no existe"), HttpStatus.NOT_FOUND);
 
-        Caso caso = casoService.getOne(id);
+            TipoCaso tipoCaso = tipoCasoService.getOne(casoDto.getTipoCaso().getId());
+            caso.setTipoCaso(tipoCaso);
+        }else{
+            if(tipoCasoService.existsByNombre(casoDto.getTipoCaso().getNombre()))
+                 return new ResponseEntity(new Mensaje("El nombre de Tipo de caso existe"), HttpStatus.NOT_FOUND);
+
+            TipoCaso tipoCaso = tipoCasoService.save(new TipoCaso(casoDto.getTipoCaso().getNombre()));
+            caso.setTipoCaso(tipoCaso);
+        }
+
         caso.setCodigo(casoDto.getCodigo());
         caso.setRecomendado(casoDto.getRecomendado());
         caso.setCreacion(casoDto.getCreacion());
-        caso.setTipoCaso(tipoCaso);
         caso.setCliente(cliente);
 
         casoService.save(caso);

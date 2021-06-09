@@ -7,7 +7,13 @@
           <input type="text" class="form-control" id="cliente" name="cliente" [(ngModel)]="nombreCliente" placeholder="Cliente" required  disabled="true">
         </div>
 
-        <div class="form-group">
+        <div class="form-group" >
+          <label class="checkbox-inline">
+            <input type="checkbox" name="isActualizar" [(ngModel)]="nuevoTipoCaso"> Crear un nuevo Tipo de Caso
+          </label>
+        </div>
+
+        <div class="form-group" *ngIf="!nuevoTipoCaso">
           <label for="nombre">Tipo de Caso:</label>
           <select class="form-select" aria-label="Default select example" name="tipoCaso"
           id="tipoCaso" [(ngModel)]="IdtipoCaso" required >
@@ -15,6 +21,12 @@
             <option *ngFor="let valorTipoC of tipoCasos" [value]="valorTipoC.id" >{{valorTipoC.nombre}}</option>
 
           </select>
+        </div>
+
+        <div class="form-group" *ngIf="nuevoTipoCaso">
+          <label for="nombre">Nombre de Tipo de Caso:</label>
+          <input type="text" class="form-control" id="nombreTipoCaso" name="nombreTipoCaso"
+           [(ngModel)]="nombreTipoCaso" placeholder="Nombre de Tipo de Caso" required>
         </div>
 
         <div class="form-group">
@@ -32,6 +44,7 @@
             <input type="checkbox" name="isActualizar" [(ngModel)]="actualizarFecha"> Actualizar Fecha de Creacion
           </label>
         </div>
+
 
         <div class="form-group" *ngIf="!actualizarFecha">
           <label for="nombre">Fecha de Creacion:</label>

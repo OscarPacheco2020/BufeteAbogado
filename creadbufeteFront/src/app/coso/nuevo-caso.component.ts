@@ -22,6 +22,8 @@ export class NuevoCasoComponent implements OnInit {
   tipoCasos: TipoCaso[] = [];
   IdtipoCaso: number;
   tipoCaso: TipoCaso;
+  nuevoTipoCaso: boolean;
+  nombreTipoCaso: string;
 
   constructor(
     private casoService: CasoService,
@@ -33,6 +35,7 @@ export class NuevoCasoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.nuevoTipoCaso = false;
     const id = this.activatedRouter.snapshot.params.id;
     this.clienteServer.detail(id).subscribe(
       (data) => {
@@ -68,9 +71,13 @@ export class NuevoCasoComponent implements OnInit {
 
   onCreate(): void {
 
-    for (let caso of this.tipoCasos) {
-      if (caso.id == this.IdtipoCaso) {
-        this.tipoCaso = caso;
+    if(this.nuevoTipoCaso){
+      this.tipoCaso =  new TipoCaso(this.nombreTipoCaso);
+    }else{
+      for (let caso of this.tipoCasos) {
+        if (caso.id == this.IdtipoCaso) {
+          this.tipoCaso = caso;
+        }
       }
     }
 
