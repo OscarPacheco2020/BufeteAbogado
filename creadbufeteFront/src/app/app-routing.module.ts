@@ -9,6 +9,7 @@ import { EditarCasoComponent } from './coso/editar-caso.component';
 import { ListaCasoClienteComponent } from './coso/lista-caso-cliente.component';
 import { ListaCasoComponent } from './coso/lista-caso.component';
 import { NuevoCasoComponent } from './coso/nuevo-caso.component';
+import { DeleteTipoCasoComponent } from './tipoCaso/delete-tipo-caso.component';
 import { DetalleTipoCasoComponent } from './tipoCaso/detalle-tipo-caso.component';
 import { EditarTipoCasoComponent } from './tipoCaso/editar-tipo-caso.component';
 import { ListaTipoCasoComponent } from './tipoCaso/lista-tipo-caso.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'detalleTipoCaso/:id', component: DetalleTipoCasoComponent },
   { path: 'nuevoTipoCaso', component: NuevoTipoCasoComponent },
   { path: 'editarTipoCaso/:id', component: EditarTipoCasoComponent },
+  { path: 'deleteTipoCaso/:id', component: DeleteTipoCasoComponent },
   { path: 'listaTipoCaso', component: ListaTipoCasoComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

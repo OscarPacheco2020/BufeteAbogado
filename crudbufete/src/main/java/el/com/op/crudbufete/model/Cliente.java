@@ -30,7 +30,7 @@ public class Cliente {
 
     private String direccion;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Caso> casos;
 
     public Cliente() {

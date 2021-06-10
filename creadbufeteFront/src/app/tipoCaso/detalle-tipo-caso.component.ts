@@ -25,7 +25,6 @@ export class DetalleTipoCasoComponent implements OnInit {
     this.tipoCasoServer.detail(id).subscribe(
       data => {
         this.tipoCaso = data;
-
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {

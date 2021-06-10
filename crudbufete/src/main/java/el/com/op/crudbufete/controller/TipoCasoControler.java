@@ -2,14 +2,17 @@ package el.com.op.crudbufete.controller;
 
 import el.com.op.crudbufete.dto.Mensaje;
 import el.com.op.crudbufete.dto.TipoCasoDto;
+import el.com.op.crudbufete.model.Caso;
 import el.com.op.crudbufete.model.TipoCaso;
 import el.com.op.crudbufete.service.TipoCasoService;
+import el.com.op.crudbufete.service.CasoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1.0/tipoCaso")
@@ -18,6 +21,9 @@ public class TipoCasoControler {
 
     @Autowired
     TipoCasoService tipoCasoService;
+
+    @Autowired
+    CasoService casoService;
 
     @GetMapping("/")
     public ResponseEntity<List<TipoCaso>> paginas(){
@@ -71,7 +77,44 @@ public class TipoCasoControler {
     public ResponseEntity<?> delete(@PathVariable("id")Integer id){
         if(!tipoCasoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
+        
+
         tipoCasoService.delete(id);
-        return new ResponseEntity(new Mensaje("Tipo de Caso eliminado"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Tipo de Caso eliminado "), HttpStatus.OK);
     }
+
+    @PutMapping("/updateCasosForTipos/{id}")
+    public ResponseEntity<?> updateList(@PathVariable("id")Integer id, 
+    @RequestBody TipoCasoDto tipoCasoDto){
+
+        if(!tipoCasoService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
+
+        TipoCaso newTipoCaso = new TipoCaso();
+        if(tipoCasoDto.getId() !=null){
+            if(!tipoCasoService.existsById(tipoCasoDto.getId()))
+            return new ResponseEntity(new Mensaje("No existe El caso para remplazar"), HttpStatus.NOT_FOUND);
+            
+            newTipoCaso = tipoCasoService.getOne(tipoCasoDto.getId());
+        }else{
+           
+            newTipoCaso = tipoCasoService.save(new TipoCaso(tipoCasoDto.getNombre()));
+        }
+
+        TipoCaso oldTipoCaso = tipoCasoService.getOne(id);
+
+        List<Caso> listaCaso = casoService.listByTipoCaso(oldTipoCaso);
+
+        List<Caso> casos = new ArrayList<>();
+
+        for(Caso caso : listaCaso){
+            caso.setTipoCaso(newTipoCaso);
+            casos.add(caso);
+        }
+        
+        casoService.updateAllList(casos);
+        
+        return new ResponseEntity(new Mensaje("Tipo de caso Remplazado por " + newTipoCaso.getNombre()), HttpStatus.OK);
+    }
+
 }

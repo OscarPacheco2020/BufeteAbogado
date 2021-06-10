@@ -32,4 +32,8 @@ export class TipoCasoService {
     return this.httpClient.delete<any>(this.tipocasoUrl + `/${id}`);
   }
 
+  public updateTipoCasoInCasos(id: number, tipoCaso: TipoCaso): Observable<any> {
+    return this.httpClient.put<any>(this.tipocasoUrl + '/updateCasosForTipos'+ `/${id}` , tipoCaso);
+  }
+
 }

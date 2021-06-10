@@ -34,19 +34,5 @@ export class ListaTipoCasoComponent implements OnInit {
     );
   }
 
-  borrar(id: number){
-    this.tipoCasoService.delete(id).subscribe(
-      data => {
-        this.toastr.success('Tipo de Caso Eliminado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
-        });
-        this.cargarTipoCasos();
-      },
-      err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
-      }
-    );
-  }
+
 }

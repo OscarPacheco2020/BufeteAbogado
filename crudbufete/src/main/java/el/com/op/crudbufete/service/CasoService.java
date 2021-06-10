@@ -2,7 +2,11 @@ package el.com.op.crudbufete.service;
 
 import el.com.op.crudbufete.model.Caso;
 import el.com.op.crudbufete.model.Cliente;
+import el.com.op.crudbufete.model.TipoCaso;
 import el.com.op.crudbufete.repository.CasoRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,5 +48,13 @@ public class CasoService {
 
     public boolean existeByCodigo(String codigo){
         return casoRepository.existsByCodigo(codigo);
+    }
+
+    public List<Caso> listByTipoCaso(TipoCaso tipoCaso){
+        return casoRepository.findByTipoCaso(tipoCaso);
+    }
+
+    public void updateAllList(List<Caso> casos){
+        casoRepository.saveAll(casos);
     }
 }

@@ -25,6 +25,7 @@ import { ListaTipoCasoComponent } from './tipoCaso/lista-tipo-caso.component';
 import { DetalleTipoCasoComponent } from './tipoCaso/detalle-tipo-caso.component';
 import { EditarTipoCasoComponent } from './tipoCaso/editar-tipo-caso.component';
 import { NuevoTipoCasoComponent } from './tipoCaso/nuevo-tipo-caso.component';
+import { DeleteTipoCasoComponent } from './tipoCaso/delete-tipo-caso.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NuevoTipoCasoComponent } from './tipoCaso/nuevo-tipo-caso.component';
     ListaTipoCasoComponent,
     DetalleTipoCasoComponent,
     EditarTipoCasoComponent,
-    NuevoTipoCasoComponent
+    NuevoTipoCasoComponent,
+    DeleteTipoCasoComponent
   ],
   imports: [
     BrowserModule,

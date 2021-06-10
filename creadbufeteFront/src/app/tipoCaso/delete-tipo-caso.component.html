@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-4 mx-auto">
+      <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+        <div class="form-group">
+          <label for="nombre">Nombre de Tipo a Eliminar:</label>
+          <input type="text" class="form-control" id="nombreTipoCaso" name="nombreTipoCaso" [(ngModel)]="nombre" placeholder="Cliente" required  disabled="true">
+        </div>
+
+        <div class="form-group" >
+          <label class="checkbox-inline">
+            <input type="checkbox" name="isActualizar" [(ngModel)]="nuevoTipoCaso"> Crear un nuevo Tipo de Caso a remplazar
+          </label>
+        </div>
+
+        <div class="form-group" *ngIf="!nuevoTipoCaso">
+          <label for="nombre">Tipo de Caso a remplazar:</label>
+          <select class="form-select" aria-label="Default select example" name="tipoCaso"
+          id="tipoCaso" [(ngModel)]="IdtipoCaso" required >
+
+            <option *ngFor="let valorTipoC of tipoCasos" [value]="valorTipoC.id" >{{valorTipoC.nombre}}</option>
+
+          </select>
+        </div>
+
+        <div class="form-group" *ngIf="nuevoTipoCaso">
+          <label for="nombre">Nombre de Tipo de Caso a remplazar:</label>
+          <input type="text" class="form-control" id="nombreTipoCaso" name="nombreTipoCaso"
+           [(ngModel)]="nombreTipoCaso" placeholder="Nombre de Tipo de Caso a remplazar" required>
+        </div>
+
+
+
+        <div class="form-group">
+          <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">Actualizar</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
