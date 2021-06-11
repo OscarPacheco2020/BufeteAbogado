@@ -22,10 +22,13 @@ public class ClienteDto {
 
     private String direccion;
 
+    private String recomendado;
+
     public ClienteDto() {
     }
 
-    public ClienteDto(String nombre, TipoCliente tipoCliente, String dui, String nit, String telefono, String celular, String direccion) {
+    public ClienteDto(String nombre, TipoCliente tipoCliente, String dui, String nit, 
+                      String telefono, String celular, String direccion, String recomendado) {
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
         this.dui = dui;
@@ -33,6 +36,7 @@ public class ClienteDto {
         this.telefono = telefono;
         this.celular = celular;
         this.direccion = direccion;
+        this.recomendado = recomendado;
     }
 
     public String getNombre() {
@@ -98,4 +102,13 @@ public class ClienteDto {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getRecomendado() {
+        return recomendado;
+    }
+
+    public void setRecomendado(String recomendado) {
+        this.recomendado = recomendado;
+    }
+
 }

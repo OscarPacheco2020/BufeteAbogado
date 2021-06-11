@@ -9,17 +9,14 @@ export class Caso {
 
   creacion: Date;
 
-  recomendado: string;
-
   cliente: Cliente;
 
   tipoCaso: TipoCaso;
 
-  constructor(codigo: string, creacion: Date, recomendado: string,
+  constructor(codigo: string, creacion: Date,
     cliente: Cliente, tipoCaso: TipoCaso){
     this.codigo = codigo;
     this.creacion = creacion;
-    this.recomendado = recomendado;
     this.cliente = cliente;
     this.tipoCaso = tipoCaso;
   }

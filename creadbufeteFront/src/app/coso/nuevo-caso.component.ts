@@ -15,7 +15,6 @@ import { TipoCaso } from '../models/tipo-caso';
 })
 export class NuevoCasoComponent implements OnInit {
   codigo: string;
-  recomendado: string;
   creacion: Date;
   nombreCliente: string;
   cliente: Cliente;
@@ -24,6 +23,7 @@ export class NuevoCasoComponent implements OnInit {
   tipoCaso: TipoCaso;
   nuevoTipoCaso: boolean;
   nombreTipoCaso: string;
+
 
   constructor(
     private casoService: CasoService,
@@ -84,7 +84,6 @@ export class NuevoCasoComponent implements OnInit {
     const nuevoCaso = new Caso(
       this.codigo,
       this.creacion,
-      this.recomendado,
       this.cliente,
       this.tipoCaso
     );

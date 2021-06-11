@@ -8,16 +8,13 @@ public class CasoDto {
 
     private Calendar creacion;
 
-    private String recomendado;
-
     private ClienteDto cliente;
 
     private TipoCasoDto tipoCaso;
 
-    public CasoDto(String codigo, Calendar creacion, String recomendado, ClienteDto cliente, TipoCasoDto tipoCaso) {
+    public CasoDto(String codigo, Calendar creacion, ClienteDto cliente, TipoCasoDto tipoCaso) {
         this.codigo = codigo;
         this.creacion = creacion;
-        this.recomendado = recomendado;
         this.cliente = cliente;
         this.tipoCaso = tipoCaso;
     }
@@ -36,14 +33,6 @@ public class CasoDto {
 
     public void setCreacion(Calendar creacion) {
         this.creacion = creacion;
-    }
-
-    public String getRecomendado() {
-        return recomendado;
-    }
-
-    public void setRecomendado(String recomendado) {
-        this.recomendado = recomendado;
     }
 
     public ClienteDto getCliente() {

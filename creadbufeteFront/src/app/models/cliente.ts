@@ -15,8 +15,11 @@ export class Cliente {
 
     direccion: string;
 
+    recomendado: string;
+
     constructor(nombre: string, tipoCliente: string, dui: string,
-        nit: string, telefono: string, celular: string, direccion: string){
+        nit: string, telefono: string, celular: string, direccion: string,
+        recomendado: string){
             this.nombre = nombre;
             this.tipoCliente = tipoCliente;
             this.dui = dui;
@@ -24,6 +27,7 @@ export class Cliente {
             this.telefono = telefono;
             this.celular = celular;
             this.direccion = direccion;
+            this.recomendado = recomendado;
         }
 
 }

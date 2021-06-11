@@ -19,7 +19,6 @@ export class EditarCasoComponent implements OnInit {
   nuevacreacionActual: Date;
   creacion: Date;
   nombreCliente: string;
-  recomendado: string;
   actualizarFecha: boolean;
   tipoCaso: TipoCaso;
   tipoCasos: TipoCaso[] = [];
@@ -43,7 +42,6 @@ export class EditarCasoComponent implements OnInit {
         this.caso = data;
         this.nombreCliente = this.caso.cliente.nombre;
         this.creacionActual = new Date(this.caso.creacion.toString());
-        this.recomendado = this.caso.recomendado;
         this.codigo = this.caso.codigo;
         this.actualizarFecha = false;
         this.tipoCaso = this.caso.tipoCaso;
@@ -96,7 +94,7 @@ export class EditarCasoComponent implements OnInit {
       }
     }
 
-    const casoNuevo = new Caso(this.codigo, this.creacion, this.recomendado,
+    const casoNuevo = new Caso(this.codigo, this.creacion,
       this.caso.cliente, this.tipoCaso);
 
     this.casoServer.update(id, casoNuevo).subscribe(

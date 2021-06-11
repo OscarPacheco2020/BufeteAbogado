@@ -31,6 +31,8 @@ export class NuevoClienteComponent implements OnInit {
 
   vista: boolean = true;
 
+  recomendado: string;
+
   tipos: Tipo[] = [
     {value: 'NATURAL'},
     {value: 'LEGAL'},
@@ -48,7 +50,7 @@ export class NuevoClienteComponent implements OnInit {
   onCreate(): void {
 
     const cliente = new Cliente(this.nombre , this.tipoCliente,
-      this.dui, this.nit , this.telefono , this.celular , this.direccion);
+      this.dui, this.nit , this.telefono , this.celular , this.direccion, this.recomendado);
 
       var validarParaSalvar = true;
       if(!this.validar_campo(this.dui)){

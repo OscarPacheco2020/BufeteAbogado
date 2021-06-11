@@ -52,7 +52,8 @@ public class ClienteControler {
 
         Cliente cliente = new Cliente(clienteDto.getNombre(),
                 clienteDto.getTipoCliente(), clienteDto.getDui(), clienteDto.getNit(),
-                clienteDto.getTelefono(), clienteDto.getCelular(), clienteDto.getDireccion());
+                clienteDto.getTelefono(), clienteDto.getCelular(), clienteDto.getDireccion(), 
+                clienteDto.getRecomendado());
         clienteService.save(cliente);
         return new ResponseEntity(new Mensaje("Cliente creado"), HttpStatus.OK);
     }
@@ -71,6 +72,7 @@ public class ClienteControler {
         cliente.setTelefono(clienteDto.getTelefono());
         cliente.setCelular(clienteDto.getCelular());
         cliente.setDireccion(clienteDto.getDireccion());
+        cliente.setRecomendado(clienteDto.getRecomendado());
         clienteService.save(cliente);
         return new ResponseEntity(new Mensaje("Cliente actualizado"), HttpStatus.OK);
     }

@@ -16,8 +16,6 @@ public class Caso {
     @Temporal(TemporalType.DATE)
     private Calendar creacion;
 
-    private String recomendado;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCliente", nullable = false)
     private Cliente cliente;
@@ -33,10 +31,9 @@ public class Caso {
         this.id = id;
     }
 
-    public Caso(String codigo, Calendar creacion, String recomendado, Cliente cliente, TipoCaso tipoCaso) {
+    public Caso(String codigo, Calendar creacion, Cliente cliente, TipoCaso tipoCaso) {
         this.codigo = codigo;
         this.creacion = creacion;
-        this.recomendado = recomendado;
         this.cliente = cliente;
         this.tipoCaso = tipoCaso;
     }
@@ -45,7 +42,6 @@ public class Caso {
         this.id = id;
         this.codigo = codigo;
         this.creacion = creacion;
-        this.recomendado = recomendado;
         this.cliente = cliente;
         this.tipoCaso = tipoCaso;
     }
@@ -60,14 +56,6 @@ public class Caso {
 
     public void setCreacion(Calendar creacion) {
         this.creacion = creacion;
-    }
-
-    public String getRecomendado() {
-        return recomendado;
-    }
-
-    public void setRecomendado(String recomendado) {
-        this.recomendado = recomendado;
     }
 
     public Cliente getCliente() {

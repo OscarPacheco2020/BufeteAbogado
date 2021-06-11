@@ -70,7 +70,6 @@ public class CasoControler {
             return new ResponseEntity(new Mensaje("El Codigo ya existe"), HttpStatus.NOT_FOUND);
         Caso caso = new Caso();
         caso.setCodigo(casoDto.getCodigo());
-        caso.setRecomendado(casoDto.getRecomendado());
         caso.setCreacion(casoDto.getCreacion());
 
         Cliente cliente = clienteService.getOne(casoDto.getCliente().getId());
@@ -124,7 +123,6 @@ public class CasoControler {
         }
 
         caso.setCodigo(casoDto.getCodigo());
-        caso.setRecomendado(casoDto.getRecomendado());
         caso.setCreacion(casoDto.getCreacion());
         caso.setCliente(cliente);
 

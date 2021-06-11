@@ -9,22 +9,29 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="nombre">Recomendado:</label>
+                  <input type="text" class="form-control" id="recomendado" name="recomendado"
+                  [(ngModel)]="cliente.recomendado" placeholder="Recomendado">
+                </div>
+
+                <div class="form-group">
                     <label for="nombre">Tipo de Cliente</label>
                     <select id="tipoCliente" class="form-select"  id="pais" [(ngModel)]="cliente.tipoCliente" name="pais" >
                         <option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.value}}</option>
                       </select>
                 </div>
 
+
                 <div class="form-group" *ngIf="vista">
                     <label for="nombre">Dui</label>
                     <input type="text" class="form-control" id="dui" name="dui"
-                    [(ngModel)]="cliente.dui">
+                    [(ngModel)]="cliente.dui" required>
                 </div>
 
                 <div class="form-group">
                     <label for="nombre">Nit</label>
                     <input type="text" class="form-control" id="nit" name="nit"
-                    [(ngModel)]="cliente.nit">
+                    [(ngModel)]="cliente.nit" required>
                 </div>
 
                 <div class="form-group">
